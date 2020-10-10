@@ -3,6 +3,7 @@ package com.andrew.rental.service.impl;
 import com.andrew.rental.model.Car;
 import com.andrew.rental.model.Status;
 import com.andrew.rental.service.CarService;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,9 +24,13 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void setStatusById(UUID id, Status status) {
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+
+        restTemplate.setRequestFactory(requestFactory);
+
         String requestUrl = baseUrl + "/" + id.toString();
         Map<String, Object> statusMap = new HashMap<>();
-        statusMap.put("status", status);
+        statusMap.put("status", status.toString());
         restTemplate.patchForObject(requestUrl, statusMap, String.class);
     }
 }

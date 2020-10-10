@@ -20,12 +20,10 @@ public class ActiveRent {
 
     private int duration;
 
-    @JsonIgnore
     @Column(name = "car_id")
     private UUID carId;
 
 
-    @JsonIgnore
     @Column(name = "client_id")
     private UUID clientId;
 

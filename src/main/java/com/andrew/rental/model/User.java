@@ -2,6 +2,8 @@ package com.andrew.rental.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Column;
@@ -13,6 +15,7 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class User {
     private UUID id;
 
@@ -21,6 +24,5 @@ public class User {
     private String email;
     private String login;
 
-    @Enumerated(EnumType.STRING)
     private Role role;
 }

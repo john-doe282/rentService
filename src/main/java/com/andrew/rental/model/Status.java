@@ -1,6 +1,8 @@
 package com.andrew.rental.model;
 
-public enum Status {
+import java.io.Serializable;
+
+public enum Status implements Serializable {
     AVAILABLE,
     RENTED
 }

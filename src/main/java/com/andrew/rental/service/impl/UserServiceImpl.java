@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private final String baseUrl = "http://localhost:8070/users";
+    private final String baseUrl = System.getenv("USERS_URL") + ":8082/users";
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Override

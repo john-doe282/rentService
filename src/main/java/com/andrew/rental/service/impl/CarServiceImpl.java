@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Service
 public class CarServiceImpl implements CarService {
-    private final String baseUrl = "http://localhost:8060/cars";
+    private final String baseUrl = System.getenv("CARS_URL") + ":8084/cars";
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Override

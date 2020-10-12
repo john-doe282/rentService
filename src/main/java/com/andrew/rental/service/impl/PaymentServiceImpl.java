@@ -14,7 +14,7 @@ import java.util.Map;
 @Service
 public class PaymentServiceImpl implements PaymentService {
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String baseUrl = "http://localhost:8050/payment";
+    private final String baseUrl = System.getenv("BANK_URL") + ":8081/payment";
 
     private void performPostRequest(String url, Map<String, Object> body) {
         HttpHeaders headers = new HttpHeaders();

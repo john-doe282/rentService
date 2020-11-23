@@ -1,8 +1,9 @@
 package com.andrew.rental.model;
 
+import com.andrew.rental.AddRentRequest;
+import com.andrew.rental.GetRentResponse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -11,8 +12,10 @@ import java.util.UUID;
 @Entity
 @Table(name = "active_rent")
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @DynamicUpdate
+@Builder
 public class ActiveRent {
     @Id
     @GeneratedValue
@@ -27,4 +30,20 @@ public class ActiveRent {
     @Column(name = "client_id")
     private UUID clientId;
 
+    public GetRentResponse toGetRentResponse() {
+        return GetRentResponse.newBuilder().
+                setId(id.toString()).
+                setDuration(duration).
+                setCarId(carId.toString()).
+                setClientId(clientId.toString()).
+                build();
+    }
+
+    public static ActiveRent fromAddRequest (AddRentRequest rentRequest) {
+        return new ActiveRentBuilder().
+                duration(rentRequest.getDuration()).
+                carId(UUID.fromString(rentRequest.getCarId())).
+                clientId(UUID.fromString(rentRequest.getClientId())).
+                build();
+    }
 }

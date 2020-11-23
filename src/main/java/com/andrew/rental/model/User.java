@@ -1,9 +1,7 @@
 package com.andrew.rental.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import com.andrew.rental.UsersShort;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Column;
@@ -15,7 +13,8 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
+@Builder
 public class User {
     private UUID id;
 
@@ -25,4 +24,15 @@ public class User {
     private String login;
 
     private Role role;
+
+    public static User fromUsersShort (UsersShort response) {
+        return new UserBuilder().
+                id(UUID.fromString(response.getId())).
+                name(response.getName()).
+                surname(response.getSurname()).
+                email(response.getEmail()).
+                login(response.getLogin()).
+                role(Role.valueOf(response.getRole().toString())).
+                build();
+    }
 }

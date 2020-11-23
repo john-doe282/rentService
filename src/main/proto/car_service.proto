@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package com.andrew.rental;
+
+option java_multiple_files = true;
+
+message GetCarRequest {
+  string id = 1;
+}
+
+enum Status {
+  AVAILABLE = 0;
+  RENTED = 1;
+}
+
+message SetStatusRequest {
+  string id = 1;
+  Status status = 2;
+}
+
+message SetStatusResponse {
+
+}
+message GetCarResponse {
+  string id = 1;
+  string model = 2;
+  string type = 3;
+  int32 price_per_hour = 4;
+  Status status = 5;
+  string owner_id = 6;
+}
+
+
+service CarService {
+  rpc get(GetCarRequest) returns (GetCarResponse);
+  rpc setStatus(SetStatusRequest) returns (SetStatusResponse);
+}

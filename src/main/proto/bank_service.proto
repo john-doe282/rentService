@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package com.andrew.rental;
+
+option java_multiple_files = true;
+
+message TransactionRequest {
+  string sender_id = 1;
+  string receiver_id = 2;
+  int64 amount = 3;
+}
+
+message TransactionResponse {
+
+}
+
+service BankAccountService {
+  rpc transaction(TransactionRequest) returns (TransactionResponse);
+}

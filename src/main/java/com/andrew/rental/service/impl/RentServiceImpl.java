@@ -8,8 +8,14 @@ import com.andrew.rental.service.PaymentService;
 import com.andrew.rental.service.RentService;
 import com.andrew.rental.service.UserService;
 import javassist.NotFoundException;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.context.ApplicationContext;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +34,6 @@ public class RentServiceImpl implements RentService {
 
     @Autowired
     private PaymentService paymentService;
-
 
     private final double tax = 0.3;
 
@@ -91,6 +96,21 @@ public class RentServiceImpl implements RentService {
     @Override
     public List<ActiveRent> activeRentsForUserId(UUID id) throws NotFoundException {
         return activeRentRepository.findActiveRentsByClientId(id);
+    }
+
+    @Override
+    public void setPaymentService(PaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
+
+    @Override
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Override
+    public void setCarService(CarService carService) {
+        this.carService = carService;
     }
 }
 

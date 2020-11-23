@@ -1,4 +1,4 @@
-package com.andrew.rental.controller;
+package com.andrew.rental.controller.rest;
 
 import com.andrew.rental.model.ActiveRent;
 import com.andrew.rental.service.RentService;

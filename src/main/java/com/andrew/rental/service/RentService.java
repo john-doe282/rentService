@@ -11,4 +11,8 @@ public interface RentService {
     ActiveRent getActiveRentById(UUID id) throws NotFoundException;
     void closeRentById(UUID id) throws NotFoundException;
     List<ActiveRent> activeRentsForUserId(UUID id) throws NotFoundException;
+
+    void setPaymentService(PaymentService paymentService);
+    void setUserService(UserService userService);
+    void setCarService(CarService carService);
 }

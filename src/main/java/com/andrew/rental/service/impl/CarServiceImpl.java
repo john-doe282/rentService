@@ -13,9 +13,15 @@ import java.util.UUID;
 
 @Service
 public class CarServiceImpl implements CarService {
-    private final String baseUrl = System.getenv("CARS_URL") + ":8084/cars";
+    private String baseUrl = System.getenv("CARS_URL") + ":8084/cars";
     private final RestTemplate restTemplate = new RestTemplate();
 
+    public CarServiceImpl() {
+        String host = System.getenv("CARS_URL");
+        if (!host.startsWith("http://")) {
+            baseUrl = "http://" + host + ":8084/cars";
+        }
+    }
     @Override
     public Car getCarById(UUID id) {
         String requestUrl = baseUrl + "/" + id.toString();

@@ -13,9 +13,15 @@ import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private final String baseUrl = System.getenv("USERS_URL") + ":8082/users";
+    private String baseUrl = System.getenv("USERS_URL") + ":8082/users";
     private final RestTemplate restTemplate = new RestTemplate();
 
+    public UserServiceImpl() {
+        String host = System.getenv("USERS_URL");
+        if (!host.startsWith("http://")) {
+            baseUrl = "http://" + host + ":8082/users";
+        }
+    }
     @Override
     public User getUserById(UUID id) {
         String requestUrl = baseUrl + "/" + id.toString();

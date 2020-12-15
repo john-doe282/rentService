@@ -3,6 +3,7 @@ package com.andrew.rental.model;
 import com.andrew.rental.AddRentRequest;
 import com.andrew.rental.GetRentResponse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -24,10 +25,12 @@ public class ActiveRent {
     private int duration;
 
     @Column(name = "car_id")
+    @JsonProperty("car_id")
     private UUID carId;
 
 
     @Column(name = "client_id")
+    @JsonProperty("client_id")
     private UUID clientId;
 
     public GetRentResponse toGetRentResponse() {
